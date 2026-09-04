@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoTrackerServer", "VideoTrackerServer\VideoTrackerServer.csproj", "{E6B9224F-CF8A-4332-BF38-DC4D57E8EB7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoTrackerServer.Application", "VideoTrackerServer.Application\VideoTrackerServer.Application.csproj", "{59E20C53-77C1-4876-AAD6-C2EA0779621C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoTrackerServer.Domain", "VideoTrackerServer.Domain\VideoTrackerServer.Domain.csproj", "{3F72A399-AA7F-4217-8830-55D2D26BC385}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoTrackerServer.Repositories", "VideoTrackerServer.Repositories\VideoTrackerServer.Repositories.csproj", "{E6497139-074E-48B2-B361-E8A23B3A945E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6B9224F-CF8A-4332-BF38-DC4D57E8EB7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B9224F-CF8A-4332-BF38-DC4D57E8EB7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B9224F-CF8A-4332-BF38-DC4D57E8EB7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B9224F-CF8A-4332-BF38-DC4D57E8EB7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59E20C53-77C1-4876-AAD6-C2EA0779621C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E20C53-77C1-4876-AAD6-C2EA0779621C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E20C53-77C1-4876-AAD6-C2EA0779621C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E20C53-77C1-4876-AAD6-C2EA0779621C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F72A399-AA7F-4217-8830-55D2D26BC385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F72A399-AA7F-4217-8830-55D2D26BC385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F72A399-AA7F-4217-8830-55D2D26BC385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F72A399-AA7F-4217-8830-55D2D26BC385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6497139-074E-48B2-B361-E8A23B3A945E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6497139-074E-48B2-B361-E8A23B3A945E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6497139-074E-48B2-B361-E8A23B3A945E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6497139-074E-48B2-B361-E8A23B3A945E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Middlewares\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\VideoTrackerServer.Application\VideoTrackerServer.Application.csproj" />
+      <ProjectReference Include="..\VideoTrackerServer.Domain\VideoTrackerServer.Domain.csproj" />
+      <ProjectReference Include="..\VideoTrackerServer.Repositories\VideoTrackerServer.Repositories.csproj" />
+    </ItemGroup>
+
+</Project>
