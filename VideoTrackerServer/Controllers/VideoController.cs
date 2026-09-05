@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VideoTrackerServer.DTOs;
 
 namespace VideoTrackerServer.Controllers;
 
@@ -10,8 +11,9 @@ public class VideoController : ControllerBase
     ///     Записать коллекцию информации о просмотренном видео
     /// </summary>
     [HttpPost("set-video-information")]
-    public Task SetVideoInformation()
-    {
-        return Task.CompletedTask;
+    public IActionResult SetVideoInformation([FromBody] VideoInformationRequest[] request)
+    {   
+        Console.WriteLine($"VideoInformationRequest: \ntime:");
+        return Ok("Маладец 5");
     }
 }
