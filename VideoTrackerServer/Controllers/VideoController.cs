@@ -13,7 +13,6 @@ public class VideoController : ControllerBase
     [HttpPost("set-video-information")]
     public IActionResult SetVideoInformation([FromBody] VideoInformationRequest[] request)
     {   
-        Console.WriteLine($"VideoInformationRequest: \ntime:");
         return Ok("Маладец 5");
     }
 }

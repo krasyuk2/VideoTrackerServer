@@ -33,8 +33,27 @@ public class VideoInformationRequest
     public int Duration { get; set; }
     
     /// <summary>
-    ///     Скорость воспроизведения.
+    ///     Скорость воспроизведения.+
     /// </summary>
     [JsonPropertyName("speed")]
     public double PaybackRate { get; set; }
+
+    /// <summary>
+    ///     Обложка в плеере.
+    /// </summary>
+    [JsonPropertyName("poster")]
+    public string Poster { get; set; } = string.Empty;
+
+    /// <summary>
+    ///     Ссылка плера.
+    /// </summary>
+    [JsonPropertyName("src")]
+    public string PlayerUrl {get; set;} = String.Empty;
+    
+    /// <summary>
+    ///     Ссылка веб станицы на котоой плеер.
+    /// </summary>
+    [JsonPropertyName("webSiteUrl")]
+    public string WebSiteUrl { get; set; } = String.Empty;
+
 }
