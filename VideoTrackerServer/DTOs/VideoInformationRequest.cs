@@ -18,7 +18,7 @@ public class VideoInformationRequest
     ///     Текущее время, приходит количество секунд - без дробной части
     /// </summary>
     [JsonPropertyName("time")]
-    public int Time { get; set; }
+    public int[] Time { get; set; } = Array.Empty<int>();
     
     /// <summary>
     ///     Заголовок станицы.
@@ -56,4 +56,9 @@ public class VideoInformationRequest
     [JsonPropertyName("webSiteUrl")]
     public string WebSiteUrl { get; set; } = String.Empty;
 
+    /// <summary>
+    ///     Основные og теги.
+    /// </summary>
+    [JsonPropertyName("og")]
+    public OgProperty OgProperty { get; set; }
 }
