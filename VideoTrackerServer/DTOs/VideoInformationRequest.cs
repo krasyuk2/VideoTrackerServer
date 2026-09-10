@@ -60,5 +60,5 @@ public class VideoInformationRequest
     ///     Основные og теги.
     /// </summary>
     [JsonPropertyName("og")]
-    public OgProperty OgProperty { get; set; }
+    public OgPropertyDto OgProperty { get; set; }
 }

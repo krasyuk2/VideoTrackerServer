@@ -1,6 +1,6 @@
 ﻿namespace VideoTrackerServer.DTOs;
 
-public class OgProperty
+public class OgPropertyDto
 {
     /// <summary>
     ///     Заголовок.

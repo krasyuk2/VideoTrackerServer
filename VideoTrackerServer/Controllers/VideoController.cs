@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VideoTrackerServer.Domain.Abstractions;
 using VideoTrackerServer.DTOs;
+using VideoTrackerServer.Mapping;
 
 namespace VideoTrackerServer.Controllers;
 
@@ -8,11 +10,31 @@ namespace VideoTrackerServer.Controllers;
 public class VideoController : ControllerBase
 {
     /// <summary>
+    ///     Сервис по обработке видео.
+    /// </summary>
+    private readonly IVideoService _videoService;
+    
+    /// <summary>
+    ///     Маппинг.
+    /// </summary>
+    private readonly VideoInformationMapper _videoInformationMapper;
+
+    /// <summary>
+    ///     Конструктор.
+    /// </summary>
+    public VideoController(IVideoService videoService, VideoInformationMapper videoInformationMapper)
+    {
+        _videoService = videoService;
+        _videoInformationMapper = videoInformationMapper;
+    }
+    
+    /// <summary>
     ///     Записать коллекцию информации о просмотренном видео
     /// </summary>
     [HttpPost("set-video-information")]
-    public IActionResult SetVideoInformation([FromBody] VideoInformationRequest[] request)
-    {   
-        return Ok("Маладец 5");
+    public async Task ProcessVideoInformation([FromBody] VideoInformationRequest[] request)
+    {
+        var videoInformationModel = _videoInformationMapper.VideoInformationProcessMapping(request);
+        await _videoService.ProcessVideoInformation(videoInformationModel);
     }
 }
