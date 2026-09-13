@@ -9,8 +9,8 @@ namespace VideoTrackerServer.Application.Implementations;
 public class VideoService : IVideoService
 {
     /// <inheritdoc/>
-    public async Task ProcessVideoInformation(VideoInformation videoInformation)
+    public async Task ProcessVideoInformation(VideoInformation[] videoInformation)
     {
-        throw new NotImplementedException();
+        
     }
 }

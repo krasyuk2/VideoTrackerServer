@@ -6,9 +6,14 @@
 public class VideoInformation
 {
     /// <summary>
-    ///     Словарь значений зависимостей событий и времени.
+    ///     Событие, которое произошло с плеером.
     /// </summary>
-    public Dictionary<VideoEventTypes, int[]> VideoEvents { get; set; } = new Dictionary<VideoEventTypes, int[]>();
+    public VideoEventTypes EventType { get; set; }
+    
+    /// <summary>
+    ///     Текущее время, приходит количество секунд - без дробной части
+    /// </summary>
+    public int[] Time { get; set; } = Array.Empty<int>();
     
     /// <summary>
     ///     Заголовок станицы.
@@ -36,7 +41,7 @@ public class VideoInformation
     public string PlayerUrl {get; set;} = String.Empty;
     
     /// <summary>
-    ///     Ссылка веб станицы на которо й плеер.
+    ///     Ссылка веб станицы на которой плеер.
     /// </summary>
     public string WebSiteUrl { get; set; } = String.Empty;
 
@@ -44,4 +49,9 @@ public class VideoInformation
     ///     Основные og теги.
     /// </summary>
     public OgProperty OgProperty { get; set; }
+    
+    /// <summary>
+    ///     Проверка того что при событии, вкладка была активна
+    /// </summary>
+    public bool IsActiveTab { get; set; }
 }

@@ -61,4 +61,10 @@ public class VideoInformationRequest
     /// </summary>
     [JsonPropertyName("og")]
     public OgPropertyDto OgProperty { get; set; }
+    
+    /// <summary>
+    ///     Проверка того что при событии, вкладка была активна
+    /// </summary>
+    [JsonPropertyName("isActiveTab")]
+    public bool IsActiveTab { get; set; }
 }
