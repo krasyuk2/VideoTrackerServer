@@ -1,4 +1,5 @@
 using VideoTrackerServer.Application.Implementations;
+using VideoTrackerServer.Application.Options;
 using VideoTrackerServer.Domain.Abstractions;
 using VideoTrackerServer.Mapping;
 
@@ -9,6 +10,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<VideoInformationMapper>();
 builder.Services.AddScoped<IVideoService, VideoService>();
+
+builder.Services.AddOptions<ContentTypeDetectionOption>();
 
 var app = builder.Build();
 

@@ -8,6 +8,6 @@ public enum ContentVideoTypes
     Movie,
     Serial,
     Anime,
-    Video, // По типу ютуба и тд
+    Video,
     Unrecognized
 }

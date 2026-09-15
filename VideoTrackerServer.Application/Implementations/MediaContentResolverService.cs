@@ -1,4 +1,9 @@
-﻿using VideoTrackerServer.Domain.Abstractions;
+﻿using System.Collections.Immutable;
+using System.Text.RegularExpressions;
+using Microsoft.Extensions.Options;
+using VideoTrackerServer.Application.Options;
+using VideoTrackerServer.Domain.Abstractions;
+using VideoTrackerServer.Domain.Models;
 
 namespace VideoTrackerServer.Application.Implementations;
 
@@ -8,41 +13,73 @@ namespace VideoTrackerServer.Application.Implementations;
 public class MediaContentResolverService : IMediaContentResolverServer
 {
     /// <summary>
+    ///     Конфиги по определению типа.
+    /// </summary>
+    private readonly ContentTypeDetectionOption _option;
+
+    /// <summary>
+    ///     Конструктор.
+    /// </summary>
+    public MediaContentResolverService(IOptions<ContentTypeDetectionOption> option)
+    {
+        _option = option.Value;
+    }
+    
+    /// <summary>
     ///     Получить название видео.
     /// </summary>
     /// <returns> Название видео без мусора. </returns>
-    private string GetNameMedia()
+    private string GetNameMedia(VideoInformation videoInformation)
     {
-        var test1 = new[]
-        {
-            "Менталист — 1 сезон 6 серия — смотреть онлайн бесплатно в хорошем качестве. Пойманный с поличным",
-            "Менталист — 1 сезон 6 серия",
-            "Игра престолов: 4 сезон 4 серия - смотреть онлайн",
-            "Наруто (1 сезон) озвучка 2х2 смотреть онлайн (все серии) — Аниме",
-            "Любовь, смерть и роботы - 1 сезон 1 серия - смотреть онлайн",
-            "Человек-паук: Новый день фильм (2026) в хорошем HD качестве смотреть онлайн",
-            "Шерлок 1 сезон 1 серия смотреть онлайн",
-            "Сериал Гангстерленд смотреть онлайн!",
-            "Вне себя - смотреть онлайн бесплатно в хорошем качестве",
-            "Вне себя",
-            "Паук-Нуар (сериал, 1 сезон) смотреть онлайн в HD качестве бесплатно",
-            "Настоящий детектив смотреть онлайн в хорошем качестве!",
-            "Клан Сопрано 1 сезон 1 серия смотреть онлайн",
-            "Лучше звоните Солу 1 сезон 1 серия смотреть онлайн",
-            "Сорвиголова 1, 2, 3 Сезон Смотреть Сериал Онлайн Бесплатно в Хорошем Качестве на Лордфильм Все Серии",
-            "Заложница | Taken (2008) - смотреть видео онлайн от «Смотри кино!» в хорошем качестве, бесплатно опубликованное 23 марта 2024 года в 21:43:53 01:33:25."
-        };
-        return "";
-    }
-
-    private ContentVideoTypes GetVideoType()
-    {
-        //Тут смотрим Title, og:Title, og:Description, URL
-
-        var serialKeyWords = new[] { "" };
-        var filmKeyWords = new[] { "" };
-        var animeKeyWords = new[] { "" };
         
-        return ContentVideoTypes.Unrecognized;
     }
+
+    /// <summary>
+    ///     Получить тип медиа.
+    /// </summary>
+    /// <param name="videoInformation"> Информация о медиа. </param>
+    /// <returns> Тип медиа. </returns>
+    private ContentVideoTypes GetContentMediaType(VideoInformation videoInformation)
+    {
+        var score = new Dictionary<ContentVideoTypes, double>(); 
+        SetScore(score, videoInformation.Title.ToLower());
+        if (CheckMaxScore(score)) return score.MaxBy(x => x.Value).Key;
+        
+        SetScore(score, videoInformation.OgProperty.Title?.ToLower());
+        if (CheckMaxScore(score)) return score.MaxBy(x => x.Value).Key;
+        
+        SetScore(score, videoInformation.OgProperty.Description?.ToLower());
+        if (CheckMaxScore(score)) return score.MaxBy(x => x.Value).Key;
+        
+        SetScore(score, videoInformation.OgProperty.Url?.ToLower());
+        return score.Values.Sum() <= 0 ? ContentVideoTypes.Unrecognized : score.MaxBy(x => x.Value).Key;
+    }
+
+    private void SetScore(Dictionary<ContentVideoTypes, double> score, string? source)
+    {
+        if(string.IsNullOrEmpty(source)) return;
+        foreach (var rule in _option.Rules)
+        {
+            if (rule.IsRegex)
+            {
+                var regex = new  Regex(rule.KeyWord);
+                var match = regex.Matches(source);
+                if(match.Count <= 0) continue;
+            }
+            else
+            {
+                if (!source.Contains(rule.KeyWord)) continue;
+            }
+            if(!score.TryAdd(rule.Type, rule.Weight))
+                score[rule.Type] += rule.Weight;
+        }
+    }
+
+    /// <summary>
+    ///     Проверить что мы уже уверены какой тип.
+    /// </summary>
+    /// <param name="score"> Словарь тип - вероятность. </param>
+    /// <returns> Есть ли значение которое 100% верное. </returns>
+    private bool CheckMaxScore(Dictionary<ContentVideoTypes, double> score) => score.Values.Max() >= 1.0d;
 }
+
