@@ -2,18 +2,15 @@
 
 namespace VideoTrackerServer.Application.Options;
 
-/// <summary>
-///     Настройки ключевых слов для поиска.
-/// </summary>
 public class TypeRuleOption
 {
     /// <summary>
-    ///     Тип к которому отновится слово поиска.
+    ///     Тип контента к которому относится слово
     /// </summary>
     public ContentVideoTypes Type { get; set; }
     
     /// <summary>
-    ///     Слово сопоставления.
+    ///     Ключевое слово сопоставления.
     /// </summary>
     public string KeyWord { get; set; }
     
@@ -23,7 +20,7 @@ public class TypeRuleOption
     public double Weight { get; set; }
     
     /// <summary>
-    ///     Регулярное ли выражение слово сопоставления.
+    ///     Является ли ключевое слово регулярным выражением.
     /// </summary>
     public bool IsRegex { get; set; }
 }

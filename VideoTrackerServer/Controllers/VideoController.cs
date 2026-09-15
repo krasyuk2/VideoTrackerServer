@@ -32,9 +32,9 @@ public class VideoController : ControllerBase
     ///     Записать коллекцию информации о просмотренном видео
     /// </summary>
     [HttpPost("set-video-information")]
-    public async Task ProcessVideoInformation([FromBody] VideoInformationRequest[] request)
+    public List<string> ProcessVideoInformation([FromBody] VideoInformationRequest[] request)
     {
         var videoInformationModel = _videoInformationMapper.VideoInformationProcessMapping(request);
-        await _videoService.ProcessVideoInformation(videoInformationModel);
+        return _videoService.ProcessVideoInformation(videoInformationModel);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Microsoft.Extensions.Options;
 using VideoTrackerServer.Application.Options;
 using VideoTrackerServer.Domain.Abstractions;
@@ -10,28 +9,34 @@ namespace VideoTrackerServer.Application.Implementations;
 /// <summary>
 ///     Сервис определения типа контента, и получение его информации
 /// </summary>
-public class MediaContentResolverService : IMediaContentResolverServer
+public class MediaContentResolverService : IMediaContentResolverService
 {
     /// <summary>
-    ///     Конфиги по определению типа.
+    ///     Конфиги поиска по типу.
     /// </summary>
-    private readonly ContentTypeDetectionOption _option;
+    private readonly ContentTypeDetectionOption _typeDetectionOption;
 
     /// <summary>
     ///     Конструктор.
     /// </summary>
-    public MediaContentResolverService(IOptions<ContentTypeDetectionOption> option)
+    public MediaContentResolverService(IOptions<ContentTypeDetectionOption> typeDetectionOption)
     {
-        _option = option.Value;
+        _typeDetectionOption = typeDetectionOption.Value;
+    }
+
+    public string GetInformationMediaContent(VideoInformation videoInformation)
+    {
+        return GetContentTypeMedia(videoInformation).ToString();
     }
     
     /// <summary>
-    ///     Получить название видео.
+    ///     Получить название медиа.
     /// </summary>
-    /// <returns> Название видео без мусора. </returns>
+    /// <param name="videoInformation"> Информация о медиа. </param>
+    /// <returns> Название медиа. </returns>
     private string GetNameMedia(VideoInformation videoInformation)
     {
-        
+        return "";
     }
 
     /// <summary>
@@ -39,47 +44,44 @@ public class MediaContentResolverService : IMediaContentResolverServer
     /// </summary>
     /// <param name="videoInformation"> Информация о медиа. </param>
     /// <returns> Тип медиа. </returns>
-    private ContentVideoTypes GetContentMediaType(VideoInformation videoInformation)
+    private ContentVideoTypes GetContentTypeMedia(VideoInformation videoInformation)
     {
-        var score = new Dictionary<ContentVideoTypes, double>(); 
-        SetScore(score, videoInformation.Title.ToLower());
-        if (CheckMaxScore(score)) return score.MaxBy(x => x.Value).Key;
-        
-        SetScore(score, videoInformation.OgProperty.Title?.ToLower());
-        if (CheckMaxScore(score)) return score.MaxBy(x => x.Value).Key;
-        
-        SetScore(score, videoInformation.OgProperty.Description?.ToLower());
-        if (CheckMaxScore(score)) return score.MaxBy(x => x.Value).Key;
-        
-        SetScore(score, videoInformation.OgProperty.Url?.ToLower());
-        return score.Values.Sum() <= 0 ? ContentVideoTypes.Unrecognized : score.MaxBy(x => x.Value).Key;
-    }
-
-    private void SetScore(Dictionary<ContentVideoTypes, double> score, string? source)
-    {
-        if(string.IsNullOrEmpty(source)) return;
-        foreach (var rule in _option.Rules)
+        var score = new Dictionary<ContentVideoTypes, double>();
+        foreach (var (type, text) in EnumerateMediaSources(videoInformation))
         {
-            if (rule.IsRegex)
+            if(!_typeDetectionOption.SourceWeights.TryGetValue(type, out var weight))
+                continue;
+            if(string.IsNullOrEmpty(text)) continue;
+            foreach (var rule in _typeDetectionOption.Rules)
             {
-                var regex = new  Regex(rule.KeyWord);
-                var match = regex.Matches(source);
-                if(match.Count <= 0) continue;
+                if (rule.IsRegex)
+                {
+                    var regex = new Regex(rule.KeyWord);
+                    var match = regex.Matches(text);
+                    if (match.Count > 0)
+                        score.TryAdd(rule.Type, weight);
+                }
+                if(text.Contains(rule.KeyWord))
+                    score.TryAdd(rule.Type, weight);
             }
-            else
-            {
-                if (!source.Contains(rule.KeyWord)) continue;
-            }
-            if(!score.TryAdd(rule.Type, rule.Weight))
-                score[rule.Type] += rule.Weight;
         }
+        var sum = score.Sum(x => x.Value);
+        if(sum <= 0)
+            return ContentVideoTypes.Unrecognized;
+        
+        var best = score.MaxBy(x => x.Value);
+        return best.Value >= _typeDetectionOption.Threshold ? best.Key : ContentVideoTypes.Unrecognized;
     }
 
-    /// <summary>
-    ///     Проверить что мы уже уверены какой тип.
-    /// </summary>
-    /// <param name="score"> Словарь тип - вероятность. </param>
-    /// <returns> Есть ли значение которое 100% верное. </returns>
-    private bool CheckMaxScore(Dictionary<ContentVideoTypes, double> score) => score.Values.Max() >= 1.0d;
+    private IEnumerable<(MediaSourceTypes Type, string? Text)> EnumerateMediaSources(VideoInformation videoInformation)
+    {
+        yield return (MediaSourceTypes.Title, videoInformation.Title);
+        yield return (MediaSourceTypes.OgUrl, videoInformation.OgProperty.Url);
+        yield return (MediaSourceTypes.OgTitle, videoInformation.OgProperty.Title);
+        yield return (MediaSourceTypes.OgDescription, videoInformation.OgProperty.Description);
+        yield return (MediaSourceTypes.OgUrl, videoInformation.OgProperty.Url);
+        yield return (MediaSourceTypes.PageUrl, videoInformation.WebSiteUrl);
+        yield return (MediaSourceTypes.PlayerUrl, videoInformation.PlayerUrl);
+    }
 }
 

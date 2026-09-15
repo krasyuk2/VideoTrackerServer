@@ -1,12 +1,24 @@
-﻿namespace VideoTrackerServer.Application.Options;
+﻿using VideoTrackerServer.Domain.Models;
+
+namespace VideoTrackerServer.Application.Options;
 
 /// <summary>
-///     Настройки обнаружение типа медиа.
+///     Настройки для определения типа медиа.
 /// </summary>
 public class ContentTypeDetectionOption
 {
     /// <summary>
+    ///     Порог при котором мы можем сказать какой тип.
+    /// </summary>
+    public double Threshold { get; set; }
+    
+    /// <summary>
+    ///     Источники информации с весами.
+    /// </summary>
+    public Dictionary<MediaSourceTypes, double> SourceWeights { get; set; } = new Dictionary<MediaSourceTypes, double>();
+    
+    /// <summary>
     ///     Правила сопоставления.
     /// </summary>
-    public TypeRuleOption[] Rules { get; set; }
+    public List<TypeRuleOption> Rules { get; set; } = new List<TypeRuleOption>();
 }

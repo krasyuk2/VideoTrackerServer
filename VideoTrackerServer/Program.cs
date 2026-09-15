@@ -10,8 +10,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<VideoInformationMapper>();
 builder.Services.AddScoped<IVideoService, VideoService>();
+builder.Services.AddScoped<IMediaContentResolverService, MediaContentResolverService>();
 
-builder.Services.AddOptions<ContentTypeDetectionOption>();
+builder.Services.AddOptions<ContentTypeDetectionOption>()
+    .Bind(builder.Configuration.GetSection(nameof(ContentTypeDetectionOption)));
 
 var app = builder.Build();
 
