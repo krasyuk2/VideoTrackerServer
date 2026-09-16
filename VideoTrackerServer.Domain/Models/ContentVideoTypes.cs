@@ -1,4 +1,4 @@
-﻿namespace VideoTrackerServer.Domain.Abstractions;
+﻿namespace VideoTrackerServer.Domain.Models;
 
 /// <summary>
 ///     Перечисление типов видео.

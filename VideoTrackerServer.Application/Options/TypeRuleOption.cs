@@ -1,4 +1,5 @@
 ﻿using VideoTrackerServer.Domain.Abstractions;
+using VideoTrackerServer.Domain.Models;
 
 namespace VideoTrackerServer.Application.Options;
 
