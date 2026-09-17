@@ -8,9 +8,29 @@ namespace VideoTrackerServer.Application.Implementations;
 /// </summary>
 public class MediaContentResolverService : IMediaContentResolverService
 {
+    /// <summary>
+    ///     Сервис парсинга полученной информации о медиа.
+    /// </summary>
+    private readonly IMediaProviderService _videoProviderService;
+
+    /// <summary>
+    ///     Конструктор.
+    /// </summary>
+    public MediaContentResolverService(IMediaProviderService videoProviderService)
+    {
+        _videoProviderService = videoProviderService;
+    }
+    
+    /// <summary>
+    ///     Собрать информацию о медиа.
+    /// </summary>
+    /// <param name="videoInformation"> Информация о медиа. </param>
+    /// <returns> Обработанные данные о медиа. </returns>
     public string GetInformationMediaContent(VideoInformation videoInformation)
     {
-        throw new NotImplementedException();
+        var name = _videoProviderService.GetMediaName(videoInformation);
+        var type = _videoProviderService.GetMediaType(videoInformation);
+        return $"{name} - {type}";
     }
 }
 

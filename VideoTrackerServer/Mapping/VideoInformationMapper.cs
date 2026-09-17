@@ -35,4 +35,28 @@ public class VideoInformationMapper
             },
             IsActiveTab = x.IsActiveTab,
         }).ToArray(); }
+
+    public VideoInformation VideoInformationProcessMapping(VideoInformationRequest videoInformationRequests)
+    {
+        return new VideoInformation()
+        {
+            EventType = videoInformationRequests.EventType,
+            Time = videoInformationRequests.Time,
+            Title = videoInformationRequests.Title,
+            Duration = videoInformationRequests.Duration,
+            PaybackRate = videoInformationRequests.PaybackRate,
+            Poster = videoInformationRequests.Poster,
+            PlayerUrl = videoInformationRequests.PlayerUrl,
+            WebSiteUrl = videoInformationRequests.WebSiteUrl,
+            OgProperty = new OgProperty()
+            {
+                Title = videoInformationRequests.OgProperty.Title,
+                Type = videoInformationRequests.OgProperty.Type,
+                Description = videoInformationRequests.OgProperty.Description,
+                Url = videoInformationRequests.OgProperty.Url,
+                Image = videoInformationRequests.OgProperty.Image,
+            },
+            IsActiveTab = videoInformationRequests.IsActiveTab,
+        };
+    }
 }
