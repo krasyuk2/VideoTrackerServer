@@ -74,7 +74,7 @@ public class MediaProviderService : IMediaProviderService
         return title.Trim(Trail).Trim();
     }
     
-       /// <summary>
+    /// <summary>
     ///     Получить тип медиа.
     /// </summary>
     /// <param name="videoInformation"> Информация о медиа. </param>
@@ -108,6 +108,11 @@ public class MediaProviderService : IMediaProviderService
         return best.Value >= _typeDetectionOption.Threshold ? best.Key : ContentVideoTypes.Unrecognized;
     }
 
+    /// <summary>
+    ///     Возвращаем: Тип - текст.
+    /// </summary>
+    /// <param name="videoInformation"> Информация о видео. </param>
+    /// <returns> Картеж (тип - текст). </returns>
     private IEnumerable<(MediaSourceTypes Type, string? Text)> EnumerateMediaSources(VideoInformation videoInformation)
     {
         yield return (MediaSourceTypes.Title, videoInformation.Title);

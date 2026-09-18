@@ -22,9 +22,10 @@ public class MediaInformationController : ControllerBase
     /// <summary>
     ///     Конструктор.
     /// </summary>
-    public MediaInformationController(IMediaProviderService videoProviderService)
+    public MediaInformationController(IMediaProviderService videoProviderService, VideoInformationMapper videoInformationMapper)
     {
         _videoProviderService = videoProviderService;
+        _videoInformationMapper = videoInformationMapper;
     }
 
     /// <summary>
