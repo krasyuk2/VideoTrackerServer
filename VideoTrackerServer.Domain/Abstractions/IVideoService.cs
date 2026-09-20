@@ -11,5 +11,5 @@ public interface IVideoService
     ///     Обработка полученной информации о просмотренном видео, странице
     /// </summary>
     /// <param name="videoInformation"> Переданные данные о странице и видео. </param>
-    List<string> ProcessVideoInformation(VideoInformation[] videoInformation);
+    Task<List<string>> ProcessVideoInformation(VideoInformation[] videoInformation);
 }

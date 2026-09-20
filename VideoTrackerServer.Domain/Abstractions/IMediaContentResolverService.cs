@@ -12,5 +12,5 @@ public interface IMediaContentResolverService
     /// </summary>
     /// <param name="videoInformation"> Информация о видео.</param>
     /// <returns> Информация о медиа. </returns>
-    string GetInformationMediaContent(VideoInformation videoInformation);
+    Task<string> GetInformationMediaContent(VideoInformation videoInformation);
 }

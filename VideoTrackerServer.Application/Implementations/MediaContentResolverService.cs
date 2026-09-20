@@ -1,4 +1,5 @@
-﻿using VideoTrackerServer.Application.Implementations.MediaHandler;
+﻿using TmbdApi;
+using VideoTrackerServer.Application.Implementations.MediaHandler;
 using VideoTrackerServer.Domain.Abstractions;
 using VideoTrackerServer.Domain.Models;
 
@@ -19,22 +20,27 @@ public class MediaContentResolverService : IMediaContentResolverService
     /// </summary>
     private readonly MediaResolver _mediaResolver;
     
+    private readonly ITmdbClient _tmdbClient;
+
     /// <summary>
     ///     Конструктор.
     /// </summary>
-    public MediaContentResolverService(IMediaProviderService videoProviderService, MediaResolver mediaResolver)
+    public MediaContentResolverService(IMediaProviderService videoProviderService, MediaResolver mediaResolver,
+        ITmdbClient tmdbClient)
     {
         _videoProviderService = videoProviderService;
         _mediaResolver = mediaResolver;
+        _tmdbClient = tmdbClient;
     }
-    
+
     /// <inheritdoc/>
-    public string GetInformationMediaContent(VideoInformation videoInformation)
+    public async Task<string> GetInformationMediaContent(VideoInformation videoInformation)
     {
         var name = _videoProviderService.GetMediaName(videoInformation);
         var type = _videoProviderService.GetMediaType(videoInformation);
         
         var testResolve = _mediaResolver.Resolve(type);
+        var test = await _tmdbClient.GetMultiAsync("mentalist");
         
         return $"{name} - {type}";
     }

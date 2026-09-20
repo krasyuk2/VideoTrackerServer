@@ -22,12 +22,12 @@ public class VideoService : IVideoService
     }
     
     /// <inheritdoc/>
-    public List<string> ProcessVideoInformation(VideoInformation[] videoInformation)
+    public async Task<List<string>> ProcessVideoInformation(VideoInformation[] videoInformation)
     {
         var result = new List<string>();
         foreach (var videoInformationItem in videoInformation)
         {
-            var type = _mediaContentResolverService.GetInformationMediaContent(videoInformationItem);
+            var type = await _mediaContentResolverService.GetInformationMediaContent(videoInformationItem);
             result.Add(type);
         }
         return result;

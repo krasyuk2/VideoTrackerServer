@@ -1,3 +1,4 @@
+using TmbdApi;
 using VideoTrackerServer.Application.Implementations;
 using VideoTrackerServer.Application.Implementations.MediaHandler;
 using VideoTrackerServer.Application.Options;
@@ -23,6 +24,13 @@ builder.Services.AddScoped<IMediaHandler, VideoHandler>();
 
 builder.Services.AddOptions<ContentTypeDetectionOption>()
     .Bind(builder.Configuration.GetSection(nameof(ContentTypeDetectionOption)));
+
+builder.Services.AddTmdbClient(client =>
+{
+    client.BaseUrl = "https://api.themoviedb.org/3/";
+    client.BearerToken = "123";
+    client.Language = "ru-RU";
+});
 
 var app = builder.Build();
 

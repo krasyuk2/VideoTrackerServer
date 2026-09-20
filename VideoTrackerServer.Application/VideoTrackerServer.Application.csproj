@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\TmbdApi\TmbdApi.csproj" />
       <ProjectReference Include="..\VideoTrackerServer.Domain\VideoTrackerServer.Domain.csproj" />
       <ProjectReference Include="..\VideoTrackerServer.Repositories\VideoTrackerServer.Repositories.csproj" />
     </ItemGroup>
