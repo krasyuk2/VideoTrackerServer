@@ -7,5 +7,10 @@ namespace VideoTrackerServer.Domain.Abstractions;
 /// </summary>
 public interface IMediaContentResolverService
 {
+    /// <summary>
+    ///     Получить информацию о медиа.
+    /// </summary>
+    /// <param name="videoInformation"> Информация о видео.</param>
+    /// <returns> Информация о медиа. </returns>
     string GetInformationMediaContent(VideoInformation videoInformation);
 }

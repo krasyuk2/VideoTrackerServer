@@ -53,5 +53,5 @@ public class VideoInformation
     /// <summary>
     ///     Проверка того что при событии, вкладка была активна
     /// </summary>
-    public bool IsActiveTab { get; set; }
+    public bool? IsActiveTab { get; set; }
 }

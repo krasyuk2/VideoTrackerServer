@@ -28,11 +28,7 @@ public class MediaContentResolverService : IMediaContentResolverService
         _mediaResolver = mediaResolver;
     }
     
-    /// <summary>
-    ///     Собрать информацию о медиа.
-    /// </summary>
-    /// <param name="videoInformation"> Информация о медиа. </param>
-    /// <returns> Обработанные данные о медиа. </returns>
+    /// <inheritdoc/>
     public string GetInformationMediaContent(VideoInformation videoInformation)
     {
         var name = _videoProviderService.GetMediaName(videoInformation);

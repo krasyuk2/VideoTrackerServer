@@ -14,7 +14,7 @@ builder.Services.AddScoped<IVideoService, VideoService>();
 builder.Services.AddScoped<IMediaContentResolverService, MediaContentResolverService>();
 builder.Services.AddScoped<IMediaProviderService, MediaProviderService>();
 
-builder.Services.AddSingleton<MediaResolver>();
+builder.Services.AddScoped<MediaResolver>();
 builder.Services.AddScoped<IMediaHandler, MovieHandler>();
 builder.Services.AddScoped<IMediaHandler, AnimeHandler>();
 builder.Services.AddScoped<IMediaHandler, SerialHandler>();

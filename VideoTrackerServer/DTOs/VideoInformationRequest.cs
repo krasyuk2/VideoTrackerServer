@@ -66,5 +66,5 @@ public class VideoInformationRequest
     ///     Проверка того что при событии, вкладка была активна
     /// </summary>
     [JsonPropertyName("isActiveTab")]
-    public bool IsActiveTab { get; set; }
+    public bool? IsActiveTab { get; set; }
 }

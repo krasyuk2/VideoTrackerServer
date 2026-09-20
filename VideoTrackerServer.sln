@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoTrackerServer.Domain",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoTrackerServer.Repositories", "VideoTrackerServer.Repositories\VideoTrackerServer.Repositories.csproj", "{E6497139-074E-48B2-B361-E8A23B3A945E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmbdApi", "TmbdApi\TmbdApi.csproj", "{AC9DA564-6340-4F97-A83A-C570CBB2B823}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{E6497139-074E-48B2-B361-E8A23B3A945E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6497139-074E-48B2-B361-E8A23B3A945E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6497139-074E-48B2-B361-E8A23B3A945E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC9DA564-6340-4F97-A83A-C570CBB2B823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC9DA564-6340-4F97-A83A-C570CBB2B823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC9DA564-6340-4F97-A83A-C570CBB2B823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC9DA564-6340-4F97-A83A-C570CBB2B823}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

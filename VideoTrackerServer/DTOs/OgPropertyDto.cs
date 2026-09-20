@@ -1,5 +1,8 @@
 ﻿namespace VideoTrackerServer.DTOs;
 
+/// <summary>
+///     Дто на получение og атрибутов.
+/// </summary>
 public class OgPropertyDto
 {
     /// <summary>

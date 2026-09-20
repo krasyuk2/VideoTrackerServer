@@ -35,6 +35,7 @@ public class VideoController : ControllerBase
     public List<string> ProcessVideoInformation([FromBody] VideoInformationRequest[] request)
     {
         var videoInformationModel = _videoInformationMapper.VideoInformationProcessMapping(request);
-        return _videoService.ProcessVideoInformation(videoInformationModel);
+        var  result= _videoService.ProcessVideoInformation(videoInformationModel);
+        return result;
     }
 }
