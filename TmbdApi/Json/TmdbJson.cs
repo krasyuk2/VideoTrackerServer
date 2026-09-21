@@ -10,8 +10,9 @@ public static class TmdbJson
     /// <summary>
     ///     Получить настройки для snake_case.
     /// </summary>
-    public static JsonSerializerOptions Options = new(JsonSerializerDefaults.Web)
+    public static readonly JsonSerializerOptions Options = new(JsonSerializerDefaults.Web)
     {
-        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+        Converters = { new TmdbDateOnlyConverter() }
     };
 }
