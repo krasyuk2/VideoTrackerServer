@@ -30,11 +30,11 @@ public class TmdbClient : ITmdbClient
         _option = option.Value;
     }
     
-    public async Task<MultiResponseDto?> GetMultiAsync(string query, int page = 1, CancellationToken cancellationToken = default)
+    public async Task<> GetMultiAsync(string query, int page = 1, CancellationToken cancellationToken = default)
     {
         var path =
             $"https://api.themoviedb.org/3/search/multi?query={query}&include_adult=false&language={_option.Language}&page=1";
-        return await GetAsync<MultiResponseDto>(path, cancellationToken);
+        return await GetAsync<>(path, cancellationToken);
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class TmdbClient : ITmdbClient
         if (response.StatusCode == HttpStatusCode.NotFound)
             return default;
         if (!response.IsSuccessStatusCode)
-            throw new Exception("Test"); // TODO: TMDB отдает ответ об ошибки нужно спарсить
+            throw await TmdbClientException.FromHttpResponseMessageAsync(response, ct);
 
         return await response.Content.ReadFromJsonAsync<T>(cancellationToken: ct);
     }
