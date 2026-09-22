@@ -19,18 +19,14 @@ public class MediaContentResolverService : IMediaContentResolverService
     ///     Выбор реализации в зависимости от типа.
     /// </summary>
     private readonly MediaResolver _mediaResolver;
-    
-    private readonly ITmdbClient _tmdbClient;
 
     /// <summary>
     ///     Конструктор.
     /// </summary>
-    public MediaContentResolverService(IMediaProviderService videoProviderService, MediaResolver mediaResolver,
-        ITmdbClient tmdbClient)
+    public MediaContentResolverService(IMediaProviderService videoProviderService, MediaResolver mediaResolver)
     {
         _videoProviderService = videoProviderService;
         _mediaResolver = mediaResolver;
-        _tmdbClient = tmdbClient;
     }
 
     /// <inheritdoc/>
@@ -40,7 +36,6 @@ public class MediaContentResolverService : IMediaContentResolverService
         var type = _videoProviderService.GetMediaType(videoInformation);
         
         var testResolve = _mediaResolver.Resolve(type);
-        var test = await _tmdbClient.GetMultiAsync("mentalist");
         
         return $"{name} - {type}";
     }

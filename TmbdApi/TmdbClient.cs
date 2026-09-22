@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using System.Text.Json;
 using Microsoft.Extensions.Options;
 using TmbdApi.Json;
 using TmbdApi.Models.Search;
@@ -31,7 +30,9 @@ public class TmdbClient : ITmdbClient
         _option = option.Value;
     }
     
-    public async Task<SearchPageResponse<MultiResponseDto>?> GetMultiAsync(string query, int page = 1, bool adult = false,CancellationToken cancellationToken = default)
+    /// <inheritdoc/>
+    public async Task<SearchPageResponse<MultiResponseDto>?> GetMultiAsync(string query, int page = 1,
+        bool adult = false, CancellationToken cancellationToken = default)
     {
         var path =
             $"https://api.themoviedb.org/3/search/multi?query={query}&include_adult={adult}&language={_option.Language}&page=1";
