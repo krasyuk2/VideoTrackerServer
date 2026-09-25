@@ -26,8 +26,8 @@ public class UnrecognizedHandler : IMediaHandler
     }
     
     /// <inheritdoc/>
-    public string Handle()
+    public async Task<MediaContent?> Handle(string query)
     {
-        return "unrecognized";
+       return new MediaContent();
     }
 }

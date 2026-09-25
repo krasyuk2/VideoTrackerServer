@@ -28,7 +28,7 @@ builder.Services.AddOptions<ContentTypeDetectionOption>()
 builder.Services.AddTmdbClient(client =>
 {
     client.BaseUrl = "https://api.themoviedb.org/3/";
-    client.BearerToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlMTg1OWM1MDdjMGQwMmU1YzExYzMyODAzZjFhOTZmOCIsIm5iZiI6MTc4OTMxMjUyNC4yNzIsInN1YiI6IjZhYTZiZTBjYTM1OWMyZGI5YTU3ODQ3NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.alwdm3eKtMrc3ps1Gst039cdt_Lu3NG-9oXkrW3279w";
+    client.BearerToken = "Ошибся но где";
     client.Language = "ru-RU";
 });
 

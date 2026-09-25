@@ -26,8 +26,8 @@ public class VideoHandler : IMediaHandler
     }
     
     /// <inheritdoc/>
-    public string Handle()
+    public async Task<MediaContent?> Handle(string query)
     {
-        return "video";
+        return new MediaContent();
     }
 }

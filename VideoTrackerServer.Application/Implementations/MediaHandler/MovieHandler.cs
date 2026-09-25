@@ -18,6 +18,11 @@ public class MovieHandler : IMediaHandler
     private readonly ITmdbClient _tmdbClient;
 
     /// <summary>
+    ///     Значение которое отдает tmdb;
+    /// </summary>
+    private const string MEDIA_TYPE = "movie";
+    
+    /// <summary>
     ///     Конструктор.
     /// </summary>
     public MovieHandler(ITmdbClient tmdbClient)
@@ -26,8 +31,15 @@ public class MovieHandler : IMediaHandler
     }
     
     /// <inheritdoc/>
-    public string Handle()
+    public async Task<MediaContent?> Handle(string query)
     {
-        return "movie";
+        var tmdbClientResult = await _tmdbClient.GetMultiAsync(query);
+        if (tmdbClientResult is null || tmdbClientResult.Results.Length == 0)
+            return null;
+        var movie = tmdbClientResult.Results
+            .Where(m => m.MediaType == MEDIA_TYPE && m.Title!.Length == query.Length)
+            .ToList();
+        var movieId = movie.First().Id;
+        
     }
 }

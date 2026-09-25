@@ -25,6 +25,7 @@ public class MediaResolver
     ///     Выполнение реализации в зависимости от типа.
     /// </summary>
     /// <param name="type"> Тип контента. </param>
+    /// <param name="query"> Фильтр. </param>
     /// <returns> Информация о видео. </returns>
-    public string Resolve(ContentVideoTypes type) => _mediaHandlers[type].Handle();
+    public async Task<MediaContent?> Resolve(ContentVideoTypes type, string query) => await _mediaHandlers[type].Handle(query);
 }

@@ -8,6 +8,15 @@ namespace VideoTrackerServer.Domain.Abstractions;
 /// </summary>
 public interface IMediaHandler
 {
+    /// <summary>
+    ///     Тип медиа.
+    /// </summary>
     ContentVideoTypes Types { get; }
-    string Handle();
+    
+    /// <summary>
+    ///     Получить филь по имени и типу.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    Task<MediaContent?> Handle(string query);
 }
