@@ -39,6 +39,7 @@ public class TmdbClient : ITmdbClient
         return await GetAsync<SearchPageResponse<MultiResponseDto>>(path, cancellationToken);
     }
 
+    
     /// <summary>
     ///     Метод отправки запроса на api TMDB.
     /// </summary>
