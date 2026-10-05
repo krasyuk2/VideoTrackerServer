@@ -35,7 +35,7 @@ public class MediaContentResolverService : IMediaContentResolverService
         var name = _videoProviderService.GetMediaName(videoInformation);
         var type = _videoProviderService.GetMediaType(videoInformation);
         
-        var testResolve = _mediaResolver.Resolve(type);
+        var testResolve = _mediaResolver.Resolve(type, name);
         
         return $"{name} - {type}";
     }

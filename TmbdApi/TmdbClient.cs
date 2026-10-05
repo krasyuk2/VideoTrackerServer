@@ -38,7 +38,6 @@ public class TmdbClient : ITmdbClient
             $"https://api.themoviedb.org/3/search/multi?query={query}&include_adult={adult}&language={_option.Language}&page=1";
         return await GetAsync<SearchPageResponse<MultiResponseDto>>(path, cancellationToken);
     }
-
     
     /// <summary>
     ///     Метод отправки запроса на api TMDB.

@@ -18,7 +18,7 @@ public class MovieHandler : IMediaHandler
     private readonly ITmdbClient _tmdbClient;
 
     /// <summary>
-    ///     Значение которое отдает tmdb;
+    ///     Значение, которое отдает tmdb;
     /// </summary>
     private const string MEDIA_TYPE = "movie";
     
@@ -41,5 +41,9 @@ public class MovieHandler : IMediaHandler
             .ToList();
         var movieId = movie.First().Id;
         
+        return new MediaContent()
+        {
+
+        };
     }
 }
